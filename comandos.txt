@@ -1,0 +1,87 @@
+hMailServer
+Esparza2402
+Esparza2402
+
+switch : telnet
+router: ssh
+
+
+S1
+hostname S1 
+enable password cisco
+username admin secret admin
+line console 0
+login local
+line vty 0 15
+login local
+_____________________________________________-
+R1
+hostname R1
+enable password cisco 
+username admin secret admin
+line console 0
+login local
+line vty 0 15
+login local
+interface se0/0/0
+ip address 192.168.70.146 255.255.255.252
+no shutdown
+interface gi/0/0
+ip address 192.168.70.94 255.255.255.224
+no shutdown
+
+router rip
+network 192.168.70.144
+network 192.168.70.64
+version 2
+
+SSH
+ip domain-name CCNA
+crypto key generate rsa 1024
+ip ssh authentication-retries 3
+ip ssh time-out 60
+aaa new-model
+line vty 0 15
+transport input all
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+_____________________________________________________________________________
+S2
+hostname S2 
+enable secret cisco
+username admin secret admin
+line console 0
+login local
+line vty 0 15
+login local
+interface vlan 1
+ip address 192.168.20.10 255.255.255.0
+no shutdown
+/*ssh*/
+ip domain-name CCNA
+crypto key generate rsa 
+1024
+ip ssh authentication-retries 3
+ip ssh time-out 60
+aaa new-model
+line vty 0 15
+transport input all
+
